@@ -10,7 +10,7 @@ export function ProductList() {
   const [error, setError] = useState(null);
 // Состояние фильтров
 const [filters, setFilters] = useState({
-    category: undefined,
+    categories: undefined,
     minPrice: undefined,
     maxPrice: undefined
   });
@@ -43,8 +43,8 @@ if (!res.ok) {
 // 2. Фильтрация: пересчитываем список при изменении товаров или фильтров
   useEffect(() => {
     let result = products;
-     if (filters.category) {
-      result = result.filter(p => p.category === filters.category);
+     if (filters.categories && filters.categories.length > 0) {
+      result = result.filter(p => filters.categories.includes(p.category));
     }
     if (filters.minPrice !== undefined) {
       result = result.filter(p => p.price >= filters.minPrice);
