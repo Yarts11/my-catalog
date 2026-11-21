@@ -7,6 +7,8 @@ const CATEGORIES = [
   { id: "women's clothing", label: 'Женская одежда' },
 ];
 
+const PRICE_SLIDER_MAX = 1000;
+
 export function Filters({ onFilterChange, initialFilters }) {
   const [localCategories, setLocalCategories] = React.useState(initialFilters.categories || []);
   const [localMinPrice, setLocalMinPrice] = React.useState(String(initialFilters.minPrice || ''));
@@ -158,6 +160,15 @@ export function Filters({ onFilterChange, initialFilters }) {
               borderRadius: '4px',
             }}
           />
+          <input
+            type="range"
+            min="0"
+            max={PRICE_SLIDER_MAX}
+            step="1"
+            value={localMinPrice === '' ? 0 : Number(localMinPrice)}
+            onChange={handleMinChange}
+            style={{ width: '100%', cursor: 'pointer', marginTop: '8px' }}
+          />
           {errors.min && (
             <span style={{ color: 'red', fontSize: '0.85rem', marginTop: '4px', display: 'block' }}>
               {errors.min}
@@ -179,6 +190,15 @@ export function Filters({ onFilterChange, initialFilters }) {
               border: errors.max ? '1px solid red' : '1px solid #ccc',
               borderRadius: '4px',
             }}
+          />
+          <input
+            type="range"
+            min="0"
+            max={PRICE_SLIDER_MAX}
+            step="1"
+            value={localMaxPrice === '' ? PRICE_SLIDER_MAX : Number(localMaxPrice)}
+            onChange={handleMaxChange}
+            style={{ width: '100%', cursor: 'pointer', marginTop: '8px' }}
           />
           {errors.max && (
             <span style={{ color: 'red', fontSize: '0.85rem', marginTop: '4px', display: 'block' }}>
